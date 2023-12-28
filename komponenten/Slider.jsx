@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function Slider() {
     return (
         <div>
-            <Carousel controls={false} fade={true} interval={2000}>
+            <Carousel controls={false} fade={false} interval={4000}>
                 <Carousel.Item>
                     <Image className="d-block w-100 h-100 rounded-5" src='/bilder/essen/pizza.jpg' alt="pizza" width={3000} height={1000} />
                     <Carousel.Caption>
@@ -18,7 +18,7 @@ export default function Slider() {
                         <h3>Diverse schöne Sachen</h3>
                         <p>Besser als jeder Italiener um die Ecke</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item>               
             </Carousel>
         </div>
     )
