@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function ProduktListe() {
   return (
     <div>
-        <div className="row row-cols-3">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
             {jsondb.produkte.map((produkt) =>(
                 <div key={produkt.name} className="mt-3 col">
                     <Card>
