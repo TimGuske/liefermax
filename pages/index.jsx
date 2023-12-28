@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <Slider></Slider>
-      <h1>Essen</h1>
+      <h1>Essen für Tim</h1>
     </div>
   )
 }
