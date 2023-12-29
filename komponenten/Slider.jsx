@@ -9,7 +9,7 @@ export default function Slider() {
                     <Image className="d-block w-100 h-100 rounded-5" src='/bilder/essen/pizza.jpg' alt="pizza" width={3000} height={1000} />
                     <Carousel.Caption>
                         <h3>Lecker Essen bei Tim bestellen</h3>
-                        <p>Alles Nio und Regional</p>
+                        <p>Alles Bio und Regional</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
