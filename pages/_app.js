@@ -1,10 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Layout from '/komponenten/Layout'
+import Layout from '../komponenten/Layout'
+import store from '../redux/store'
+import { Provider } from 'react-redux'
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider store={store}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   )
 }
+
+export default MyApp
