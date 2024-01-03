@@ -31,7 +31,7 @@ export default function Produktseite({produkt}) {
 
     const zumWarenkorb = () =>{
         const _id = uuidv4();
-        dispatch(addProdukte({...produkt, extras, preis, menge, _id, arsch:'Hallo'}));
+        dispatch(addProdukte({...produkt, extras, preis, menge, _id}));
         // nur zum weiterleiten, wenn schon mal gedrückt wurde
         router.push('/warenkorb');
     }

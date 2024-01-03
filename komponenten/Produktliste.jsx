@@ -1,15 +1,20 @@
 import {Card, Button} from 'react-bootstrap'
 import Link from 'next/link'
-import { addProdukte } from '../redux/warenkorbSlice';
+import { addProdukte } from '../redux/warenkorbSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { setName } from '../redux/infoSlice'
 
 export default function ProduktListe({ produkte }) {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const zumWarenkorb = () =>{
-        console.log('Dispatcher aufgerufen');
-        dispatch(addProdukte({...produkte[0], extras:[{_id:2, text:'leck mich', preis:3}], preis:33, menge:33, seggel:'Tim'}));
+    const zumWarenkorb = (produkt) =>{
+        console.log('Dispatcher aufgerufen für', produkt);
+        //const prod = produkte[0];
+        //prod.preis = 99;
+        //prod.menge = 4;
+        dispatch(addProdukte({...produkt, menge:1, extras:[]}));
+        dispatch(setName('Tim'));
     }
 
     console.log('Seite aufgerufen');
@@ -30,7 +35,7 @@ export default function ProduktListe({ produkte }) {
                             <Card.Text>
                                 {produkt.beschreibung}
                             </Card.Text>
-                            <Button variant="danger" onClick={zumWarenkorb}>zum Warenkorb</Button> 
+                            <Button variant="danger" onClick={() => zumWarenkorb(produkt)}>zum Warenkorb</Button> 
                         </Card.Body>
                     </Card>
                 </div>    
