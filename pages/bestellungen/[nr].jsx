@@ -6,9 +6,6 @@ export default function Bestellung({ bestellung }) {
     const router = useRouter();
     const { nr } = router.query;
 
-    console.log("nummer aus dem header:", nr);
-    console.log("nummer aus der db", bestellung._id);
-
     let status;
 
     switch (bestellung.status) {
@@ -90,7 +87,6 @@ export async function getServerSideProps({ params }) {
 
             const res = await axios.get(`http://localhost:3000/api/bestellungen/${params.nr}`);
             bestellung = res.data;
-            console.log(res.data);
         } catch (error) {
             console.error("Fehler beim Abrufen der Daten:", error);
         }
