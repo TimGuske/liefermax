@@ -1,19 +1,37 @@
-import { Table, CloseButton, Button, Card } from 'react-bootstrap'
-import Image from 'next/image'
-import { useDispatch, useSelector } from 'react-redux'
-import Link from 'next/link'
-import { loescheProdukt } from '../redux/warenkorbSlice'
+import { Table, CloseButton, Button, Card } from 'react-bootstrap';
+import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import { loescheProdukt, leeren } from '../redux/warenkorbSlice';
+import axios from 'axios';
+import { useRouter } from "next/router";
 
 export default function Warenkorb() {
   const dispatch = useDispatch()
   const warenkorb = useSelector((state) => state.warenkorb)
+  const router = useRouter();
 
   const entfernen = (produkt) => {
     dispatch(loescheProdukt(produkt));
   }
 
-  const leeren = () => {
-    dispatch(leeren());
+  const erstelleBestellung = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/bestellungen", data);
+
+      console.log("Data:", data);
+      console.log(res);
+
+      if (res.status === 201) {
+        console.log("Res OK!");
+        dispatch(leeren());
+        router.push(`/bestellungen/${res.data._id}`);
+      }
+
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -45,7 +63,7 @@ export default function Warenkorb() {
                       </td>
                       <td>
                         <Link href={`/produkte/${produkt.url}`}>
-                            {produkt.name}
+                          {produkt.name}
                         </Link>
                       </td>
                       <td>
@@ -69,7 +87,20 @@ export default function Warenkorb() {
                     <Card.Title>
                       {warenkorb.gesamtbetrag.toFixed(2)}
                     </Card.Title>
-                    <Button variant='primary'>Zur Kasse</Button>
+                    <Button variant='primary' onClick={() => {
+
+                      const bestellung = {
+                        kunde: "Tim",
+                        adresse: "DingsBumsStrasse 8, 71364 Winnenden",
+                        betrag: warenkorb.gesamtbetrag,
+                        status: 0,
+                        zahlung: 1,
+                      };
+
+                      console.log(bestellung);
+                      erstelleBestellung(bestellung);
+
+                    }}>Zur Kasse</Button>
                   </Card.Body>
                 </Card>
               </div>

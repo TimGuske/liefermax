@@ -1,50 +1,104 @@
 import { Table, Spinner, Button, Card } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import axios from 'axios';
 
-export default function Bestellung() {
+export default function Bestellung({ bestellung }) {
     const router = useRouter();
     const { nr } = router.query;
-    return (
-        <div>
-            <h1>Bestellstatus</h1>
-            <div className="row mt-4">
-                <div className="col-9">
-                    <Table hover responsive>
-                        <thead>
-                            <tr>
-                                <th>Bestell Nr.</th>
-                                <th>Kunde</th>
-                                <th>Adresse</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{nr}</td>
-                                <td>Guybrush</td>
-                                <td>Monkey Island</td>
-                                <td>
-                                    <span>Zubereitung </span>
-                                    <Spinner animation='border' variant='success' size='sm' />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </div>
-                <div className="col-3 p-2">
-                    <div className='shadow'>
-                        <Card>
-                            <Card.Header as="h5">Gesamt</Card.Header>
-                            <Card.Body className='text-center'>
-                                <Card.Title>
-                                    6,95 EUR
-                                </Card.Title>
-                                <Button variant='success disabled'>bezahlt</Button>
-                            </Card.Body>
-                        </Card>
+
+    console.log("nummer aus dem header:", nr);
+    console.log("nummer aus der db", bestellung._id);
+
+    let status;
+
+    switch (bestellung.status) {
+        case 0:
+            status = "Eingegangen";
+            break;
+        case 1:
+            status = "Zubereitung";
+            break;
+        case 2:
+            status = "Unterwegs";
+            break;
+        case 3:
+            status = "Ausgeliefert";
+            break;
+    }
+
+    if (nr !== bestellung._id) {
+        return (
+            <div>
+                <h2>Bestellnummer {nr} nicht in der Datenbank vorhanden!</h2>
+                <h3>{bestellung.error}</h3>
+                <Button variant='primary' onClick={() => router.push('/')}>zur Karte</Button>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <h1>Bestellstatus</h1>
+                <div className="row mt-4">
+                    <div className="col-9">
+                        <Table hover responsive>
+                            <thead>
+                                <tr>
+                                    <th>Bestell Nr.</th>
+                                    <th>Kunde</th>
+                                    <th>Adresse</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{nr}</td>
+                                    <td>{bestellung.kunde}</td>
+                                    <td>{bestellung.adresse}</td>
+                                    <td>
+                                        <span>{status}</span>
+                                        {bestellung.status < 3 ? (<Spinner animation='border' variant='success' size='sm' />) : (<span>OK</span>)}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </div>
+                    <div className="col-3 p-2">
+                        <div className='shadow'>
+                            <Card>
+                                <Card.Header as="h5">Gesamt</Card.Header>
+                                <Card.Body className='text-center'>
+                                    <Card.Title>
+                                        {bestellung.betrag}
+                                    </Card.Title>
+                                    <Button variant='success disabled'>bezahlt</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+}
+
+export async function getServerSideProps({ params }) {
+    let bestellung = null;
+
+    if (params && params.nr) {
+        try {
+
+            const res = await axios.get(`http://localhost:3000/api/bestellungen/${params.nr}`);
+            bestellung = res.data;
+            console.log(res.data);
+        } catch (error) {
+            console.error("Fehler beim Abrufen der Daten:", error);
+        }
+    } else {
+        console.error("Kein 'nr'-Parameter gefunden");
+    }
+
+    return {
+        props: { bestellung }
+    };
 }

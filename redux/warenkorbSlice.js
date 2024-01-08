@@ -15,7 +15,10 @@ const warenkorbSlice = createSlice({
             console.log(action.payload);
         },
         leeren: (state) =>{
-            state = initialState;
+            state.produkte = [];
+            state.wAnzahl = 0;
+            state.gesamtbetrag = 0;
+            console.log('Warenkorb vollständig gelöscht');
         },
         loescheProdukt: (state, action) =>{
             const leftProdukte = state.produkte.filter((produkt) => produkt._id !== action.payload._id);
