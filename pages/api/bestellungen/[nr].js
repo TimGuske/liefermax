@@ -27,4 +27,18 @@ export default async function handler(req, res) {
         }
     }
 
+    if (method === "DELETE") {
+        try {
+            // Annahme: Bestellung ist das Mongoose-Modell für deine Bestellungen
+            const deletedBestellung = await Bestellung.findByIdAndDelete(nr);
+            
+            if (!deletedBestellung) {
+                return res.status(404).json({ message: "Bestellung nicht gefunden." });
+            }
+    
+            res.status(200).json(deletedBestellung);
+        } catch (error) {
+            res.status(500).json({ error: "Serverfehler beim Löschen der Bestellung." });
+        }
+    }
 }

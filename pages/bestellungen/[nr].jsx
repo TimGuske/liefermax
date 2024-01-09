@@ -53,10 +53,32 @@ export default function Bestellung({ bestellung }) {
                                     <td>{bestellung.kunde}</td>
                                     <td>{bestellung.adresse}</td>
                                     <td>
-                                        <span>{status}</span>
+                                        <span>{status} </span>
                                         {bestellung.status < 3 ? (<Spinner animation='border' variant='success' size='sm' />) : (<span>OK</span>)}
                                     </td>
                                 </tr>
+                            </tbody>
+                        </Table>
+                        <Table hover responsive>
+                            <thead>
+                                <tr>
+                                    <th>Produktname</th>
+                                    <th>Extras</th>
+                                    <th>Menge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bestellung.produkte.map((produkt)=>(
+                                <tr key={produkt._id}>
+                                    <td>{produkt.name}</td>
+                                    <td>
+                                        {produkt.extras.map((extra)=>(
+                                            <span key={extra._id}>{extra} </span>
+                                        ))}
+                                    </td>
+                                    <td>{produkt.menge}</td>
+                                </tr>
+                                ))}
                             </tbody>
                         </Table>
                     </div>

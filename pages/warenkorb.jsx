@@ -95,9 +95,14 @@ export default function Warenkorb() {
                         betrag: warenkorb.gesamtbetrag,
                         status: 0,
                         zahlung: 1,
+                        produkte: warenkorb.produkte.map((produkt) =>(
+                          {
+                            name: produkt.name, menge: produkt.menge, extras:
+                            produkt.extras.map(extra => (extra.text))
+                          }
+                        )),
                       };
 
-                      console.log(bestellung);
                       erstelleBestellung(bestellung);
 
                     }}>Zur Kasse</Button>
