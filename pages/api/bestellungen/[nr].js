@@ -18,13 +18,13 @@ export default async function handler(req, res) {
         }
     }
 
-  /*   if (method === "GET") {
+    if (method === "PUT") {
         try {
-            const bestellung = await Bestellung.findById(nr);
+            const bestellung = await Bestellung.findByIdAndUpdate(nr, req.body, { new: true });
             res.status(200).json(bestellung);
         } catch (error) {
-            res.status(200).json(error);
+            res.status(500).json(error);
         }
-    } */
+    }
 
 }

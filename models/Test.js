@@ -14,4 +14,5 @@ const TestSchema = new mongoose.Schema({
 //{timestamps: true}
 )
 
+// const Test = mongoose.model("Test", TestSchema, "Test");
 export default mongoose.models.Test || mongoose.model("Test", TestSchema)
