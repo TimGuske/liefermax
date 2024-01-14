@@ -1,7 +1,7 @@
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { addProdukte } from '../redux/warenkorbSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function ProduktListe({ produkte }) {
@@ -9,11 +9,7 @@ export default function ProduktListe({ produkte }) {
     const dispatch = useDispatch();
 
     const zumWarenkorb = (produkt) => {
-        console.log('Dispatcher aufgerufen für', produkt);
         const _id = uuidv4();
-        //const prod = produkte[0];
-        //prod.preis = 99;
-        //prod.menge = 4;
         dispatch(addProdukte({ ...produkt, menge: 1, extras: [], _id }));
     }
 
