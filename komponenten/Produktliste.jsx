@@ -2,7 +2,6 @@ import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { addProdukte } from '../redux/warenkorbSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setName } from '../redux/infoSlice';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function ProduktListe({ produkte }) {
@@ -16,7 +15,6 @@ export default function ProduktListe({ produkte }) {
         //prod.preis = 99;
         //prod.menge = 4;
         dispatch(addProdukte({ ...produkt, menge: 1, extras: [], _id }));
-        dispatch(setName('Tim'));
     }
 
     console.log('Seite aufgerufen');
