@@ -71,7 +71,19 @@ export default function Bestellung({ bestellungen }) {
 }
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    
+    const meinCookie = context.req?.cookies || '';
+
+    if (meinCookie.token !== process.env.TOKEN) {
+        return {
+            redirect: { 
+                destination: '/backend/login',
+                permanent: false,
+            }
+        }
+    }
+    
     const res = await axios.get(`http://localhost:3000/api/bestellungen`);
     return {
         props: { bestellungen: res.data },
