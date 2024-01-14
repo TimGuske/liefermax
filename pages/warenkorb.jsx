@@ -6,6 +6,7 @@ import { loescheProdukt, leeren } from '../redux/warenkorbSlice';
 import axios from 'axios';
 import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 export default function Warenkorb() {
   const dispatch = useDispatch()
@@ -40,7 +41,7 @@ export default function Warenkorb() {
   }
 
   return (
-    <div>
+    <motion.div initial={{ y: -300 }} animate={{ y: 0 }} transition={{type: 'spring', stiffness: 120}}>
       {warenkorb.wAnzahl === 0 ? (
         <h2>Der Warenkorb ist leer!</h2>
       ) : (
@@ -119,6 +120,6 @@ export default function Warenkorb() {
 
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
