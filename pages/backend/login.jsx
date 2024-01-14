@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-export default function login() {
+export default function Login() {
 
     const [benutzer, setBenutzer] = useState(null);
     const [passwort, setPasswort] = useState(null);
