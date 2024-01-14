@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { loescheProdukt, leeren } from '../redux/warenkorbSlice';
 import axios from 'axios';
 import { useRouter } from "next/router";
+import { toast } from 'react-toastify';
 
 export default function Warenkorb() {
   const dispatch = useDispatch()
@@ -13,6 +14,10 @@ export default function Warenkorb() {
 
   const entfernen = (produkt) => {
     dispatch(loescheProdukt(produkt));
+    toast.error(`${produkt.name} wurde aus dem Warenkorb entfernt`, {
+      position: 'top-center',
+      autoClose: 3000,
+    });
   }
 
   const erstelleBestellung = async (data) => {
@@ -95,10 +100,10 @@ export default function Warenkorb() {
                         betrag: warenkorb.gesamtbetrag,
                         status: 0,
                         zahlung: 1,
-                        produkte: warenkorb.produkte.map((produkt) =>(
+                        produkte: warenkorb.produkte.map((produkt) => (
                           {
                             name: produkt.name, menge: produkt.menge, extras:
-                            produkt.extras.map(extra => (extra.text))
+                              produkt.extras.map(extra => (extra.text))
                           }
                         )),
                       };

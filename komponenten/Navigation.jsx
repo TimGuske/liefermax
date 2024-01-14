@@ -14,8 +14,15 @@ const wAnzahl = useSelector((state) => state.warenkorb.wAnzahl);
             <Image src={'/bilder/logo.png'} alt='logo' width={180} height={75} />
         </Link>
         <Link href="/warenkorb">
+          {wAnzahl > 0 ? (
+            <>
             <Image src={'/bilder/warenkorb.png'} alt='warenkorb' width={30} height={30} />
-            <Badge pill bg="success">{wAnzahl}</Badge>
+            <Badge pill bg="success" style={{position: 'absolute', right: '25px', top: '25px'}}>{wAnzahl}</Badge>
+            </>
+          ) : (
+            <Image src={'/bilder/warenkorb.png'} alt='warenkorb' width={30} height={30} />
+          )
+        }
         </Link>
       </div>
     </div>
