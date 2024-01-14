@@ -1,4 +1,4 @@
-import ProduktListe from "../komponenten/ProduktListe";
+import ProduktListe from "../komponenten/Produktliste";
 import Slider from "../komponenten/Slider";
 import Produkt from "../models/Produkt";
 import mongodb from "../utils/mongodb";
