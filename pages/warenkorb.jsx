@@ -24,7 +24,7 @@ export default function Warenkorb() {
 
   const erstelleBestellung = async (data) => {
     try {
-      const res = await axios.post("/api/bestellungen", data);
+      const res = await axios.post("https://liefermax-seven.vercel.app/api/bestellungen", data);
 
       console.log("Data:", data);
       console.log(res);
@@ -32,7 +32,7 @@ export default function Warenkorb() {
       if (res.status === 201) {
         console.log("Res OK!");
         dispatch(leeren());
-        router.push(`/bestellungen/${res.data._id}`);
+        router.push(`https://liefermax-seven.vercel.app/bestellungen/${res.data._id}`);
       }
 
     }

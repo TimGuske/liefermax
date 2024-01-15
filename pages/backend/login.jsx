@@ -12,11 +12,11 @@ export default function Login() {
 
     const login = async () => {
         try {
-            await axios.post('/api/login', {
+            await axios.post('https://liefermax-seven.vercel.app/api/login', {
                 benutzer,
                 passwort
             })
-            router.push('/backend');
+            router.push('https://liefermax-seven.vercel.app/backend');
         } catch (error) {
             setError(true);
         }     

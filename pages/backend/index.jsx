@@ -10,7 +10,7 @@ export default function Bestellung({ bestellungen }) {
     const statusUpdate = async (id, aktuellerStatus) => {
         try {
             if (aktuellerStatus <= 2) {
-                await axios.put(`/api/bestellungen/` + id, { status: aktuellerStatus + 1 });
+                await axios.put(`https://liefermax-seven.vercel.app/api/bestellungen/` + id, { status: aktuellerStatus + 1 });
                 router.reload();
             }
         } catch (error) {
@@ -20,7 +20,7 @@ export default function Bestellung({ bestellungen }) {
 
     const delteProduktFromDb = async (id) => {
         try {
-            await axios.delete(`/api/bestellungen/` + id);
+            await axios.delete(`https://liefermax-seven.vercel.app/api/bestellungen/` + id);
             router.reload();
         }
         catch (error) {
@@ -47,7 +47,7 @@ export default function Bestellung({ bestellungen }) {
                             <tbody key={bestellung._id}>
                                 <tr>
                                     <td>
-                                        <Link href={`/bestellungen/${bestellung._id}`}>
+                                        <Link href={`https://liefermax-seven.vercel.app/bestellungen/${bestellung._id}`}>
                                             {bestellung._id}
                                         </Link>
                                     </td>
@@ -78,13 +78,13 @@ export async function getServerSideProps(context) {
     if (meinCookie.token !== process.env.TOKEN) {
         return {
             redirect: { 
-                destination: '/backend/login',
+                destination: 'https://liefermax-seven.vercel.app/backend/login',
                 permanent: false,
             }
         }
     }
     
-    const res = await axios.get(`/api/bestellungen`);
+    const res = await axios.get(`https://liefermax-seven.vercel.app/api/bestellungen`);
     return {
         props: { bestellungen: res.data },
     };
