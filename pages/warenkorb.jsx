@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 
+
 export default function Warenkorb() {
   const dispatch = useDispatch()
   const warenkorb = useSelector((state) => state.warenkorb)
@@ -48,8 +49,8 @@ export default function Warenkorb() {
 
         <div>
           <h1>Warenkorb</h1>
-          <div className="row mt-4">
-            <div className="col-9">
+          <div>
+            <div>
               <Table hover responsive>
                 <thead>
                   <tr>
@@ -85,13 +86,13 @@ export default function Warenkorb() {
                 </tbody>
               </Table>
             </div>
-            <div className="col-3 p-2">
+            <div>
               <div className='shadow'>
                 <Card>
                   <Card.Header as="h5">Gesamt</Card.Header>
                   <Card.Body className='text-center'>
                     <Card.Title>
-                      {warenkorb.gesamtbetrag.toFixed(2)}
+                      {warenkorb.gesamtbetrag.toFixed(2)} Euro
                     </Card.Title>
                     <Button variant='primary' onClick={() => {
 
@@ -117,7 +118,7 @@ export default function Warenkorb() {
               </div>
             </div>
           </div>
-
+                      
         </div>
       )}
     </motion.div>
