@@ -36,8 +36,8 @@ export default function Bestellung({ bestellung }) {
         return (
             <div>
                 <h1>Bestellstatus</h1>
-                <div className="row mt-4">
-                    <div className="col-9">
+                <div>
+                    <div>
                         <Table hover responsive>
                             <thead>
                                 <tr>
@@ -82,13 +82,13 @@ export default function Bestellung({ bestellung }) {
                             </tbody>
                         </Table>
                     </div>
-                    <div className="col-3 p-2">
+                    <div>
                         <div className='shadow'>
                             <Card>
                                 <Card.Header as="h5">Gesamt</Card.Header>
                                 <Card.Body className='text-center'>
                                     <Card.Title>
-                                        {bestellung.betrag}
+                                        {bestellung.betrag} Euro
                                     </Card.Title>
                                     <Button variant='success disabled'>bezahlt</Button>
                                 </Card.Body>
