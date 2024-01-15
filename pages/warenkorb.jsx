@@ -24,7 +24,7 @@ export default function Warenkorb() {
 
   const erstelleBestellung = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/bestellungen", data);
+      const res = await axios.post("/api/bestellungen", data);
 
       console.log("Data:", data);
       console.log(res);

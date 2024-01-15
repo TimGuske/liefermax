@@ -107,7 +107,7 @@ export async function getServerSideProps({ params }) {
     if (params && params.nr) {
         try {
 
-            const res = await axios.get(`http://localhost:3000/api/bestellungen/${params.nr}`);
+            const res = await axios.get(`/api/bestellungen/${params.nr}`);
             bestellung = res.data;
         } catch (error) {
             console.error("Fehler beim Abrufen der Daten:", error);

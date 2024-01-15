@@ -10,7 +10,7 @@ export default function Bestellung({ bestellungen }) {
     const statusUpdate = async (id, aktuellerStatus) => {
         try {
             if (aktuellerStatus <= 2) {
-                await axios.put(`http://localhost:3000/api/bestellungen/` + id, { status: aktuellerStatus + 1 });
+                await axios.put(`/api/bestellungen/` + id, { status: aktuellerStatus + 1 });
                 router.reload();
             }
         } catch (error) {
@@ -20,7 +20,7 @@ export default function Bestellung({ bestellungen }) {
 
     const delteProduktFromDb = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/bestellungen/` + id);
+            await axios.delete(`/api/bestellungen/` + id);
             router.reload();
         }
         catch (error) {
@@ -47,7 +47,7 @@ export default function Bestellung({ bestellungen }) {
                             <tbody key={bestellung._id}>
                                 <tr>
                                     <td>
-                                        <Link href={`http://localhost:3000/bestellungen/${bestellung._id}`}>
+                                        <Link href={`/bestellungen/${bestellung._id}`}>
                                             {bestellung._id}
                                         </Link>
                                     </td>
@@ -84,7 +84,7 @@ export async function getServerSideProps(context) {
         }
     }
     
-    const res = await axios.get(`http://localhost:3000/api/bestellungen`);
+    const res = await axios.get(`/api/bestellungen`);
     return {
         props: { bestellungen: res.data },
     };
